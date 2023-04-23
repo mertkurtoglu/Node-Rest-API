@@ -122,6 +122,41 @@ exports.getProduct = (req, res, next) => {
     });
 };
 
+exports.updateProduct = (req, res, next) => {
+  const id = req.params.productId;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "Invalid product ID" });
+  }
+
+  const updateProd = {};
+  for (const key of Object.keys(req.body)) {
+    updateProd[key] = req.body[key];
+  }
+
+  Product.updateOne({ _id: id }, { $set: updateProd })
+    .exec()
+    .then((result) => {
+      res.status(200).json({
+        message: "Product updated",
+        request: {
+          type: "GET",
+          url: "http://localhost:3000/products/" + id,
+        },
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err.message,
+        details: {
+          file: err.stack.split("\n")[1].trim().split(":")[1],
+          line: err.stack.split("\n")[1].trim().split(":")[2],
+        },
+      });
+    });
+};
+
 exports.deleteProduct = (req, res, next) => {
   const id = req.params.productId;
 

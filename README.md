@@ -80,6 +80,8 @@ PRODUCTS:
     Headers => Authorization (Bearer eyJhbGciOiJI...) , form-data => name, description, price, productImage
 - Delete a Product       => DELETE   http://localhost:3000/products/:productId
     Headers => Authorization (Bearer eyJhbGciOiJI...)
+- Update a Product       => PATCH    http://localhost:3000/products/:productId
+    Body => Write the part that you want to update as key and value ( "name" : "Test" )
 
 ORDERS:
 - Get All Orders         => GET      http://localhost:3000/orders

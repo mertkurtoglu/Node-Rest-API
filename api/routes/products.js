@@ -36,6 +36,8 @@ router.get("/:productId", ProductsController.getProduct);
 
 router.post("/", checkAuth, upload.single("productImage"), ProductsController.createProduct);
 
+router.patch("/:productId", checkAuth, ProductsController.updateProduct);
+
 router.delete("/:productId", checkAuth, ProductsController.deleteProduct);
 
 module.exports = router;
