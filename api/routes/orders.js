@@ -10,4 +10,6 @@ router.get("/:orderId", checkAuth, OrdersController.getOrder);
 
 router.post("/", checkAuth, OrdersController.createOrder);
 
+router.delete("/:orderId", checkAuth, OrdersController.deleteOrder);
+
 module.exports = router;

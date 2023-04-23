@@ -92,3 +92,23 @@ exports.getOrder = (req, res, next) => {
       });
     });
 };
+
+exports.deleteOrder = (req, res, next) => {
+  Order.deleteOne({ _id: req.params.orderId })
+    .exec()
+    .then((result) => {
+      res.status(200).json({
+        message: "Order deleted",
+        request: {
+          type: "POST",
+          url: "http://localhost:3000/orders",
+          body: { productId: "ID", quantity: "Number" },
+        },
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err.message,
+      });
+    });
+};

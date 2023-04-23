@@ -61,19 +61,30 @@ Dependencies
   - morgan
   - multer
 
-Test on Postman
+-- POSTMAN --
 
-- User Signup => POST - http://localhost:3000/user/signup
+USERS:
+- Get All Users from     => GET      http://localhost:3000/user
+- User Signup            => POST     http://localhost:3000/user/signup
     name, surname, email, password
-- User Login  => POST - http://localhost:3000/user/login
+- User Login             => POST     http://localhost:3000/user/login
     email, password
+- User Delete            => DELETE   http://localhost:3000/user/:userId
 
-- Get All Products       => GET - http://localhost:3000/products
-- Get A Specific Product => GET - http://localhost:3000/products/:productId
-- Create A Product       => POST - http://localhost:3000/products
-    form-data => name, description, price, productImage
+PRODUCTS:
+- Get All Products       => GET      http://localhost:3000/products
+    Headers => Authorization (Bearer eyJhbGciOiJI...)
+- Get A Specific Product => GET      http://localhost:3000/products/:productId
+    Headers => Authorization (Bearer eyJhbGciOiJI...)
+- Create A Product       => POST     http://localhost:3000/products
+    Headers => Authorization (Bearer eyJhbGciOiJI...) , form-data => name, description, price, productImage
+- Delete a Product       => DELETE   http://localhost:3000/products/:productId
+    Headers => Authorization (Bearer eyJhbGciOiJI...)
 
-- Get All Orders       => GET - http://localhost:3000/orders
-- Get A Specific Order => GET - http://localhost:3000/orders/:orderId
-- Create An Order      => POST - http://localhost:3000/orders
-    quantity, productId
+ORDERS:
+- Get All Orders         => GET      http://localhost:3000/orders
+- Get A Specific Order   => GET      http://localhost:3000/orders/:orderId
+- Create An Order        => POST     http://localhost:3000/orders
+    Headers => Authorization (Bearer eyJhbGciOiJI...) , Body => quantity, productId
+- Delete An Order        => DELETE   http://localhost:3000/orders/:orderId
+    Headers => Authorization (Bearer eyJhbGciOiJI...)

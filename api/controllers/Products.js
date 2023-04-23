@@ -121,3 +121,34 @@ exports.getProduct = (req, res, next) => {
       });
     });
 };
+
+exports.deleteProduct = (req, res, next) => {
+  const id = req.params.productId;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "Invalid product ID" });
+  }
+
+  Product.deleteOne({ _id: id })
+    .exec()
+    .then((result) => {
+      res.status(200).json({
+        message: "Product deleted",
+        request: {
+          type: "POST",
+          url: "http://localhost:3000/products",
+          body: { name: "String", price: "Number" },
+        },
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err.message,
+        details: {
+          file: err.stack.split("\n")[1].trim().split(":")[1],
+          line: err.stack.split("\n")[1].trim().split(":")[2],
+        },
+      });
+    });
+};
